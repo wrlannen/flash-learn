@@ -18,7 +18,7 @@ pnpm-debug.log*
 dist/
 build/
 *.css.map
-public/styles.css
+
 
 # IDE and Editor files
 .vscode/

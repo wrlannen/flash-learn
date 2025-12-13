@@ -268,6 +268,22 @@ function renderCurrentCard() {
         return div.innerHTML;
     };
 
+    // Helper to convert newlines to paragraphs
+    const formatParagraphs = (text) => {
+        // Split by newlines and filter out empty strings
+        const paragraphs = text.split('\n').filter(p => p.trim() !== '');
+
+        // If only one paragraph, return it as a single <p>
+        if (paragraphs.length === 1) {
+            return `<p class="text-xl md:text-2xl text-white leading-relaxed font-medium select-none">${escapeHtml(paragraphs[0])}</p>`;
+        }
+
+        // Multiple paragraphs: wrap each in a <p> tag with spacing
+        return paragraphs.map(p =>
+            `<p class="text-xl md:text-2xl text-white leading-relaxed font-medium select-none mb-4 last:mb-0">${escapeHtml(p.trim())}</p>`
+        ).join('');
+    };
+
     // Build code snippet HTML if present
     let codeSnippetHtml = '';
     if (card.code && card.code.trim() !== '') {
@@ -292,7 +308,9 @@ function renderCurrentCard() {
             <!-- Back -->
             <div class="absolute w-full h-full bg-gradient-to-br from-brand-900 to-slate-900 rounded-2xl p-10 flex flex-col items-center justify-center text-center backface-hidden rotate-y-180 ring-1 ring-white/10 shadow-2xl overflow-hidden">
                  <div class="flex-grow flex flex-col items-center justify-center w-full transform rotate-[0deg] overflow-auto"> 
-                    <p class="text-xl md:text-2xl text-white leading-relaxed font-medium select-none">${card.back}</p>
+                    <div class="text-left w-full">
+                        ${formatParagraphs(card.back)}
+                    </div>
                     ${codeSnippetHtml}
                 </div>
                  

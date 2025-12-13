@@ -73,7 +73,7 @@ app.post('/api/generate-cards', async (req, res) => {
                     
                     For each card:
                     1. "front": A clear, thought-provoking question or concept name.
-                    2. "back": A comprehensive explanation (3-6 sentences) that fully answers the question. Be detailed and pedagogical.
+                    2. "back": A comprehensive explanation (3-6 sentences) that fully answers the question. Be detailed and pedagogical. IMPORTANT: Break your explanation into logical paragraphs using newline characters (\\n) to separate distinct ideas or points. This makes the content more readable and easier to digest.
                     3. "code": (Highly Recommended) If the topic involves ANY programming, mathematics, commands, configuration, or technical syntax, YOU MUST PROVIDE A RELEVANT CODE SNIPPET. If it is a non-technical topic, you may leave it empty. But lean towards providing concrete examples/code whenever possible.
 
                     IMPORTANT: You must stream the response as Newline Delimited JSON (NDJSON).

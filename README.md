@@ -55,10 +55,21 @@ Before you begin, ensure you have the following installed:
 
 4. **Configure your `.env` file**
    
-   Open `.env` and add your OpenAI API key:
+   Open `.env` and configure your preferred AI provider:
+
+   **For OpenAI:**
    ```env
+   AI_PROVIDER=openai
    OPENAI_API_KEY=your_openai_api_key_here
    OPENAI_MODEL=gpt-5.2
+   PORT=3000
+   ```
+
+   **For Google Gemini:**
+   ```env
+   AI_PROVIDER=gemini
+   GEMINI_API_KEY=your_gemini_api_key_here
+   GEMINI_MODEL=gemini-2.5-flash
    PORT=3000
    ```
 
@@ -146,8 +157,11 @@ Generates flashcards for a given topic using OpenAI's API.
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `OPENAI_API_KEY` | ✅ Yes | - | Your OpenAI API key |
-| `OPENAI_MODEL` | ❌ No | `gpt5.2` | OpenAI model to use |
+| `AI_PROVIDER` | ❌ No | `openai` | 'openai' or 'gemini' |
+| `OPENAI_API_KEY` | ✅ if openai | - | Your OpenAI API key |
+| `OPENAI_MODEL` | ❌ No | `gpt-5.2` | OpenAI model to use |
+| `GEMINI_API_KEY` | ✅ if gemini | - | Your Google Gemini API key |
+| `GEMINI_MODEL` | ❌ No | `gemini-2.5-flash` | Gemini model to use |
 | `PORT` | ❌ No | `3000` | Server port |
 
 ### Tailwind CSS
@@ -162,11 +176,13 @@ ERROR: Port 3000 is already in use!
 ```
 **Solution**: Change the `PORT` in your `.env` file or kill the process using port 3000.
 
-### OpenAI API Key Missing
+### OpenAI/Gemini API Key Missing
 ```
 OPENAI_API_KEY missing
+# or
+GEMINI_API_KEY missing
 ```
-**Solution**: Ensure your `.env` file exists and contains a valid `OPENAI_API_KEY`.
+**Solution**: Ensure your `.env` file exists and contains the valid API key for the selected `AI_PROVIDER`.
 
 ### Cards Not Generating
 - Check your internet connection

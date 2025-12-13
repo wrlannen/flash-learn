@@ -1,10 +1,10 @@
 # 🧠 AI Flashcard Generator
 
-An intelligent flashcard generation application powered by OpenAI's GPT-4 that creates personalized study materials from any topic. Perfect for students, educators, and lifelong learners looking to enhance their study sessions with AI-generated content.
+An intelligent flashcard generation application powered by OpenAI's advanced language models that creates personalized study materials from any topic. Perfect for students, educators, and lifelong learners looking to enhance their study sessions with AI-generated content.
 
 ## ✨ Features
 
-- **🤖 AI-Powered Generation**: Leverages OpenAI's GPT-4o to create high-quality, educational flashcards
+- **🤖 AI-Powered Generation**: Leverages OpenAI's specific models to create high-quality, educational flashcards
 - **🎯 Context-Aware**: Avoids repeating previously studied concepts when generating new cards
 - **🎨 Beautiful Dark Mode UI**: Modern, premium interface built with Tailwind CSS
 - **🔄 Interactive Flip Animation**: Smooth card flip effects for an engaging study experience
@@ -18,7 +18,7 @@ An intelligent flashcard generation application powered by OpenAI's GPT-4 that c
 
 ### Backend
 - **Node.js** with **Express.js** - Fast, minimalist web framework
-- **OpenAI API** - GPT-4o for intelligent content generation
+- **OpenAI API** - Advanced AI model for intelligent content generation
 - **CORS** - Cross-origin resource sharing support
 - **dotenv** - Environment variable management
 
@@ -58,7 +58,7 @@ Before you begin, ensure you have the following installed:
    Open `.env` and add your OpenAI API key:
    ```env
    OPENAI_API_KEY=your_openai_api_key_here
-   OPENAI_MODEL=gpt-4o
+   OPENAI_MODEL=gpt-5.2
    PORT=3000
    ```
 
@@ -101,7 +101,7 @@ ai-flashcard-generator/
 
 ### `POST /api/generate-cards`
 
-Generates flashcards for a given topic using OpenAI's GPT-4.
+Generates flashcards for a given topic using OpenAI's API.
 
 **Request Body:**
 ```json
@@ -147,7 +147,7 @@ Generates flashcards for a given topic using OpenAI's GPT-4.
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `OPENAI_API_KEY` | ✅ Yes | - | Your OpenAI API key |
-| `OPENAI_MODEL` | ❌ No | `gpt-4o` | OpenAI model to use |
+| `OPENAI_MODEL` | ❌ No | `gpt5.2` | OpenAI model to use |
 | `PORT` | ❌ No | `3000` | Server port |
 
 ### Tailwind CSS
@@ -211,7 +211,7 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 🙏 Acknowledgments
 
-- [OpenAI](https://openai.com) for providing the GPT-4 API
+- [OpenAI](https://openai.com) for providing the AI API
 - [Tailwind CSS](https://tailwindcss.com) for the amazing utility-first CSS framework
 - [Express.js](https://expressjs.com) for the robust web framework
 

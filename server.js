@@ -52,7 +52,7 @@ app.post('/api/generate-cards', async (req, res) => {
             throw new Error('OPENAI_API_KEY missing');
         }
 
-        const model = process.env.OPENAI_MODEL || "gpt-4o";
+        const model = process.env.OPENAI_MODEL || "gpt-5.2";
         console.log(`Calling OpenAI API with model: ${model} (Streaming)`);
 
         let contextString = "";

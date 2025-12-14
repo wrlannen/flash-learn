@@ -236,6 +236,41 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Touch swipe navigation (mobile)
+let touchStartX = null;
+let touchStartY = null;
+let touchEndX = null;
+let touchEndY = null;
+const SWIPE_THRESHOLD = 50; // pixels
+
+cardsContainer.addEventListener('touchstart', (e) => {
+    if (!e.touches || e.touches.length === 0) return;
+    const t = e.touches[0];
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+});
+
+cardsContainer.addEventListener('touchend', (e) => {
+    if (!e.changedTouches || e.changedTouches.length === 0) return;
+    const t = e.changedTouches[0];
+    touchEndX = t.clientX;
+    touchEndY = t.clientY;
+
+    const dx = touchEndX - touchStartX;
+    const dy = touchEndY - touchStartY;
+
+    // Only consider mostly-horizontal swipes
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+        if (dx < 0) {
+            navigateCard(1); // swipe left → next
+        } else {
+            navigateCard(-1); // swipe right → previous
+        }
+    }
+
+    touchStartX = touchStartY = touchEndX = touchEndY = null;
+});
+
 function flipCurrentCard() {
     const cardElement = cardsContainer.querySelector('.group');
     if (cardElement) cardElement.classList.toggle('rotate-y-180');

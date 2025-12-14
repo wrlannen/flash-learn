@@ -14,5 +14,5 @@ tests
 vitest.config.js
 tailwind.config.js
 src
-TEST_COVERAGE.md
+assets
 .DS_Store

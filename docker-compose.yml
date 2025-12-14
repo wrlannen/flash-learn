@@ -1,9 +1,9 @@
 services:
-  flashcard-generator:
+  flashlearn:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: ai-flashcard-generator
+    container_name: flashlearn
     ports:
       - "${PORT:-3000}:3000"
     environment:
@@ -27,8 +27,8 @@ services:
       retries: 3
       start_period: 5s
     networks:
-      - flashcard-network
+      - flashlearn-network
 
 networks:
-  flashcard-network:
+  flashlearn-network:
     driver: bridge

@@ -1,6 +1,10 @@
-# 🧠 AI Flashcard Generator
+# 🧠 FlashLearn
 
-An intelligent flashcard generation application powered by OpenAI's advanced language models that creates personalized study materials from any topic. Perfect for students, educators, and lifelong learners looking to enhance their study sessions with AI-generated content.
+<p align="center">
+  <img src="assets/demo-screenshot.png" alt="FlashLearn Demo" width="800">
+</p>
+
+An intelligent flashcard generation application powered by advanced AI models (OpenAI or Google Gemini) that creates personalized study materials from any topic. Perfect for students, educators, and lifelong learners looking to enhance their study sessions with AI-generated content.
 
 ## 🚀 Quick Start
 
@@ -38,21 +42,24 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ## ✨ Features
 
-- **🤖 AI-Powered Generation**: Leverages OpenAI's specific models to create high-quality, educational flashcards
+- **🤖 Multi-AI Support**: Works with OpenAI GPT models or Google Gemini for intelligent flashcard generation
 - **🎯 Context-Aware**: Avoids repeating previously studied concepts when generating new cards
 - **🎨 Beautiful Dark Mode UI**: Modern, premium interface built with Tailwind CSS
 - **🔄 Interactive Flip Animation**: Smooth card flip effects for an engaging study experience
 - **📊 Progress Tracking**: Keep track of how many cards you've studied
 - **🔍 Search & Filter**: Quickly find specific flashcards in your collection
 - **💾 Local Storage**: Your flashcards are saved locally in your browser
-- **⚡ Real-time Generation**: Fast flashcard creation with loading animations
+- **⚡ Real-time Streaming**: Fast flashcard creation with streaming responses
 - **📱 Responsive Design**: Works seamlessly on desktop and mobile devices
+- **💰 Cost Tracking**: Monitor API usage and estimated costs
 
 ## 🚀 Tech Stack
 
 ### Backend
 - **Node.js** with **Express.js** - Fast, minimalist web framework
-- **OpenAI API** - Advanced AI model for intelligent content generation
+- **OpenAI API** - GPT-4 and other advanced models for intelligent content generation
+- **Google Gemini API** - Alternative AI model for content generation
+- **Winston Logger** - Comprehensive logging and monitoring
 - **CORS** - Cross-origin resource sharing support
 - **dotenv** - Environment variable management
 
@@ -67,7 +74,9 @@ Visit [http://localhost:3000](http://localhost:3000)
 Before you begin, ensure you have the following installed:
 - **Node.js** (v14 or higher)
 - **npm** (Node Package Manager)
-- **OpenAI API Key** - [Get one here](https://platform.openai.com/api-keys)
+- **API Key** - Choose one of:
+  - **OpenAI API Key** - [Get one here](https://platform.openai.com/api-keys) (GPT-4 recommended)
+  - **Google Gemini API Key** - [Get one here](https://makersuite.google.com/app/apikey) (Optional alternative)
 
 ## 🛠️ Installation
 
@@ -134,18 +143,10 @@ Follow the same steps but replace `make install` with `npm install`.
    ```
 
 4. **View logs**
-   `tests/                 # Test files
-│   ├── server.test.js    # Server API tests
-│   └── script.test.js    # Frontend tests
-├── server.js             # Express server & API endpoints
-├── package.json          # Node.js dependencies & scripts
-├── vitest.config.js      # Vitest configuration
-├── tailwind.config.js    # Tailwind CSS configuration
-├── Dockerfile            # Docker image configuration
-├── docker-compose.yml    # Docker Compose configuration
-├── Makefile             # Make commands for easy development
-├── .env.example          # Environment variable template
-├── .dockerignore        # Docker ignore rules
+   ```bash
+   make docker-logs
+   # Or: docker-compose logs -f
+   ```
 
 ## 🏃 Running the Application
 
@@ -166,8 +167,6 @@ node server.js
 ```bash
 make docker-up
 ```
-
-Then navigate to [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Start generating flashcards!
 - Enter a topic you want to learn
@@ -197,7 +196,7 @@ ai-flashcard-generator/
 
 ### `POST /api/generate-cards`
 
-Generates flashcards for a given topic using OpenAI's API.
+Generates flashcards for a given topic using your configured AI provider (OpenAI or Google Gemini).
 
 **Request Body:**
 ```json
@@ -266,7 +265,11 @@ ERROR: Port 3000 is already in use!
 OPENAI_API_KEY missing
 # or
 GEMINI_API_KEY missing
-```🧪 Testing
+```
+
+**Solution**: Make sure you have set either `OPENAI_API_KEY` or `GEMINI_API_KEY` in your `.env` file.
+
+## 🧪 Testing
 
 The project includes a comprehensive test suite using Vitest.
 
@@ -285,10 +288,7 @@ make test-coverage     # Run tests with coverage report
 npm test              # Run tests once
 npm run test:watch    # Run tests in watch mode
 npm run test:ui       # Run tests with UI
-npmx] Comprehensive test suite with Vitest
-- [x] Docker support with multi-stage builds
-- [x] Makefile for simplified development workflow
-- [ run test:coverage # Run tests with coverage report
+npm run test:coverage # Run tests with coverage report
 ```
 
 ### Test Coverage
@@ -355,19 +355,11 @@ make docker-restart  # Restart Docker containers
 
 The server includes comprehensive logging:
 - All requests are logged with timestamps
-- AI provider responses are logged
+- AI provider responses (OpenAI or Gemini) are logged
 - Error details are logged to console
 - Cost estimation for API usage
 
-Check the terminal running `node server.js` (or `make dev`)
-### Debugging
-
-The server includes comprehensive logging:
-- All requests are logged with timestamps
-- OpenAI API responses are logged
-- Error details are logged to console
-
-Check the terminal running `node server.js` for detailed logs.
+Check the terminal running `node server.js` (or `make dev`) for detailed logs.
 
 ## 🌟 Features Roadmap
 
@@ -390,7 +382,8 @@ Contributions, issues, and feature requests are welcome! Feel free to check the 
 
 ## 🙏 Acknowledgments
 
-- [OpenAI](https://openai.com) for providing the AI API
+- [OpenAI](https://openai.com) for providing GPT models via their API
+- [Google](https://google.com) for the Gemini API
 - [Tailwind CSS](https://tailwindcss.com) for the amazing utility-first CSS framework
 - [Express.js](https://expressjs.com) for the robust web framework
 

@@ -1,6 +1,7 @@
 {
   "name": "ai-flashcard-generator",
   "version": "1.0.0",
+  "description": "FlashLearn - AI-powered flashcard generator",
   "main": "index.js",
   "scripts": {
     "test": "vitest run",

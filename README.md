@@ -182,8 +182,6 @@ flashlearn/
 │   ├── index.html         # Main HTML file with Tailwind CSS
 │   ├── script.js          # Frontend JavaScript logic
 │   └── favicon.png        # App icon
-├── src/                   # Source files (Tailwind config)
-│   └── input.css         # Tailwind input styles
 ├── server.js             # Express server & API endpoints
 ├── package.json          # Node.js dependencies & scripts
 ├── tailwind.config.js    # Tailwind CSS configuration

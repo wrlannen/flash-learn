@@ -17,8 +17,7 @@ export default defineConfig({
         'node_modules/',
         'tests/',
         '*.config.js',
-        'public/styles.css',
-        'src/input.css'
+        'public/styles.css'
       ],
       include: ['server.js', 'public/script.js'],
       all: true,

@@ -345,19 +345,48 @@ function renderCurrentCard() {
         return div.innerHTML;
     };
 
+    // Helper to calculate dynamic font size based on text length
+    const getDynamicFontSize = (text, isFront = false) => {
+        const length = text.length;
+        let fontSize;
+        
+        if (isFront) {
+            // Front card title sizing
+            if (length < 15) fontSize = 'text-5xl md:text-7xl';
+            else if (length < 30) fontSize = 'text-4xl md:text-6xl';
+            else if (length < 50) fontSize = 'text-3xl md:text-5xl';
+            else if (length < 80) fontSize = 'text-2xl md:text-4xl';
+            else if (length < 120) fontSize = 'text-xl md:text-3xl';
+            else fontSize = 'text-lg md:text-2xl';
+        } else {
+            // Back card content sizing - more aggressive sizing
+            if (length < 80) fontSize = 'text-2xl md:text-4xl';
+            else if (length < 200) fontSize = 'text-xl md:text-3xl';
+            else if (length < 400) fontSize = 'text-lg md:text-2xl';
+            else if (length < 700) fontSize = 'text-base md:text-xl';
+            else fontSize = 'text-sm md:text-base';
+        }
+        
+        console.log(`Text length: ${length}, isFront: ${isFront}, fontSize: ${fontSize}`);
+        return fontSize;
+    };
+
     // Helper to convert newlines to paragraphs
     const formatParagraphs = (text) => {
         // Split by newlines and filter out empty strings
         const paragraphs = text.split('\n').filter(p => p.trim() !== '');
+        
+        // Get dynamic font size based on total text length
+        const fontSize = getDynamicFontSize(text, false);
 
         // If only one paragraph, return it as a single <p>
         if (paragraphs.length === 1) {
-            return `<p class="text-lg md:text-2xl text-white leading-relaxed font-medium select-none">${escapeHtml(paragraphs[0])}</p>`;
+            return `<p class="${fontSize} text-white leading-relaxed font-medium select-none">${escapeHtml(paragraphs[0])}</p>`;
         }
 
         // Multiple paragraphs: wrap each in a <p> tag with spacing
         return paragraphs.map(p =>
-            `<p class="text-lg md:text-2xl text-white leading-relaxed font-medium select-none mb-3 md:mb-4 last:mb-0">${escapeHtml(p.trim())}</p>`
+            `<p class="${fontSize} text-white leading-relaxed font-medium select-none mb-3 md:mb-4 last:mb-0">${escapeHtml(p.trim())}</p>`
         ).join('');
     };
 
@@ -392,7 +421,7 @@ function renderCurrentCard() {
             <div class="absolute w-full h-full bg-slate-800 rounded-2xl p-5 md:p-10 flex flex-col items-center justify-center text-center backface-hidden ring-1 ring-white/10 shadow-2xl">
                  <!-- Main Content -->
                  <div class="flex-grow flex items-center justify-center">
-                    <h3 class="text-3xl md:text-5xl font-bold text-white leading-tight select-none">${card.front}</h3>
+                    <h3 class="${getDynamicFontSize(card.front, true)} font-bold text-white leading-tight select-none">${card.front}</h3>
                  </div>
                  <!-- Footer -->
                  <p class="text-slate-500 text-xs uppercase tracking-widest mt-4">Click to flip</p>

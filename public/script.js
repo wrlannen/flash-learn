@@ -310,12 +310,12 @@ function renderCurrentCard() {
 
         // If only one paragraph, return it as a single <p>
         if (paragraphs.length === 1) {
-            return `<p class="text-base md:text-2xl text-white leading-relaxed font-medium select-none">${escapeHtml(paragraphs[0])}</p>`;
+            return `<p class="text-lg md:text-2xl text-white leading-relaxed font-medium select-none">${escapeHtml(paragraphs[0])}</p>`;
         }
 
         // Multiple paragraphs: wrap each in a <p> tag with spacing
         return paragraphs.map(p =>
-            `<p class="text-base md:text-2xl text-white leading-relaxed font-medium select-none mb-3 md:mb-4 last:mb-0">${escapeHtml(p.trim())}</p>`
+            `<p class="text-lg md:text-2xl text-white leading-relaxed font-medium select-none mb-3 md:mb-4 last:mb-0">${escapeHtml(p.trim())}</p>`
         ).join('');
     };
 
@@ -350,7 +350,7 @@ function renderCurrentCard() {
             <div class="absolute w-full h-full bg-slate-800 rounded-2xl p-5 md:p-10 flex flex-col items-center justify-center text-center backface-hidden ring-1 ring-white/10 shadow-2xl">
                  <!-- Main Content -->
                  <div class="flex-grow flex items-center justify-center">
-                    <h3 class="text-2xl md:text-5xl font-bold text-white leading-tight select-none">${card.front}</h3>
+                    <h3 class="text-3xl md:text-5xl font-bold text-white leading-tight select-none">${card.front}</h3>
                  </div>
                  <!-- Footer -->
                  <p class="text-slate-500 text-xs uppercase tracking-widest mt-4">Click to flip</p>
@@ -366,7 +366,7 @@ function renderCurrentCard() {
                 </div>
                  
                  <!-- On-card Next Button for seamless mouse usage -->
-                 <button class="next-card-btn mt-4 md:mt-6 bg-white/10 hover:bg-white/20 text-white text-sm md:text-base font-semibold py-3 md:py-4 px-6 md:px-10 rounded-full transition-all flex items-center gap-2 backdrop-blur-sm shadow-lg ring-1 ring-white/10 group-hover:bg-brand-500 group-hover:shadow-brand-500/50 shrink-0 self-center">
+                 <button class="next-card-btn mt-4 md:mt-6 bg-white/10 hover:bg-white/20 text-white text-base md:text-base font-semibold py-3 md:py-4 px-6 md:px-10 rounded-full transition-all flex items-center gap-2 backdrop-blur-sm shadow-lg ring-1 ring-white/10 group-hover:bg-brand-500 group-hover:shadow-brand-500/50 shrink-0 self-center">
                     Next Card <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                  </button>
             </div>

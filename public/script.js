@@ -32,6 +32,54 @@ function resetApp() {
     currentIndex = 0;
 }
 
+function showErrorScreen(message, isAppend = false) {
+    cardsContainer.innerHTML = '';
+    
+    const errorCard = document.createElement('div');
+    errorCard.className = 'w-full h-full bg-slate-800 rounded-2xl p-8 flex flex-col items-center justify-center text-center ring-1 ring-red-500/20 shadow-2xl';
+    errorCard.innerHTML = `
+        <div class="mb-6 bg-red-500/10 p-4 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+        </div>
+        <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">Oops! Something went wrong</h3>
+        <p class="text-slate-400 mb-8 max-w-md text-base md:text-lg">${message}</p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+            ${isAppend ? `
+                <button onclick="showEndScreen()" class="bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 px-8 rounded-full transition-colors flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Go Back
+                </button>
+            ` : `
+                <button onclick="resetApp()" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold py-3 px-8 rounded-full transition-colors flex items-center justify-center gap-2 shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Return Home
+                </button>
+            `}
+        </div>
+    `;
+    
+    cardsContainer.appendChild(errorCard);
+    
+    if (!isAppend) {
+        // Show the cards wrapper if it was hidden
+        if (cardsWrapper.classList.contains('hidden')) {
+            inputContainer.classList.add('hidden');
+            cardsWrapper.classList.remove('hidden');
+            setTimeout(() => {
+                cardsWrapper.classList.remove('opacity-0');
+            }, 50);
+            resetBtn.classList.remove('hidden');
+        }
+    }
+}
+
 async function generateCards(isAppend = false) {
     const topic = topicInput.value.trim();
     if (!topic) return;
@@ -150,17 +198,11 @@ async function generateCards(isAppend = false) {
         console.error(error);
 
         if (isAppend) {
-            alert('Could not generate more cards. Please try again.');
-            showEndScreen();
+            showErrorScreen('Could not generate more cards. Please try again later.', true);
         } else {
-            alert('Something went wrong. Please check your network or API key.');
+            showErrorScreen('Unable to generate flashcards. Please check your connection and try again.', false);
             loadingIndicator.classList.add('hidden');
             generateBtn.disabled = false;
-            // Reset UI if it failed completely before showing anything
-            if (flashcardsData.length === 0) {
-                cardsWrapper.classList.add('hidden');
-                inputContainer.classList.remove('hidden');
-            }
         }
     } finally {
         generateBtn.disabled = false;
